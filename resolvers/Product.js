@@ -1,8 +1,8 @@
-import { categories } from "../db";
-
 exports.Product = {
-    category: (parent, args, context) => {
-        const categoryId = parent.categoryId
-        return categories.find((category) => category.id === categoryId)
-    }
-}
+    category: ({ categoryId }, args, { db }) => {
+        return db.categories.find((category) => category.id === categoryId);
+    },
+    reviews: ({ id }, args, { db }) => {
+        return db.reviews.filter((review) => review.productId === id);
+    },
+};
